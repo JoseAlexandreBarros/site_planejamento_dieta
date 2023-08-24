@@ -1,0 +1,112 @@
+html {
+    min-height: 100%;
+    background-image: url(melancia.jpg);
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    z-index: -1;
+    opacity: 0.8;
+ }
+
+body {
+	font-family: "Preahvihear", sans-serif;
+	background-color: pink;
+	color: blue;
+}
+
+
+
+#header{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.carbohidratos{
+   display: flex;
+}
+
+.proteinas{
+    display: flex;
+ }
+
+ .doces{
+    display: flex;
+ }
+
+a:link,a:visited{
+    text-decoration:none;
+}
+
+a:hover {
+    color:green;
+    text-decoration:underline;
+  }
+
+.cabeca{
+    background-color: rgb(0, 225, 255);
+}
+
+img{
+    border-radius: 10px;
+}
+
+.um{
+    display: flex;
+    gap: 30px;
+}
+
+#file{
+    width: 75%;
+}
+
+.barra1{
+    width: 75%;
+    height: 10px;
+    border-radius: 10px;
+    background-color: green;
+}
+
+.barra1 div{
+    height: 100%;
+    border-radius: 10px;
+    background-color: blue;
+    width: 0%;
+
+}
+
+.barra2{
+    width: 75%;
+    height: 10px;
+    border-radius: 10px;
+    background-color: green;
+}
+
+.barra2 div{
+    height: 100%;
+    border-radius: 10px;
+    background-color: blue;
+    width: 0%;
+
+}
+
+.barra3{
+    width: 75%;
+    height: 10px;
+    border-radius: 10px;
+    background-color: green;
+}
+
+.barra3 div{
+    height: 100%;
+    border-radius: 10px;
+    background-color: blue;
+    width: 0%;
+
+}
+
+button{
+    
+    color: blue;
+}

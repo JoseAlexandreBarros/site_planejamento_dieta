@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+  <head>
+    
+    <script type="text/javascript" src="{% static 'file.js' %}"></script>
+    
+    <title>planejador de dieta</title>
+    <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Preahvihear&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href=" {% static 'style.css' %} ">
+  </head>
+  <body>
+    <div id="header">
+      <p style="text-align: center;font-size:150%;">Esse site pode ser usado para planejar sua dieta. Escolha o número de porções de cada alimento para controlar
+         a quantidade de calorias de cada tipo de alimento que você está consumindo no mês, além da quantidade total de calorias no mês.
+        Escolha o nome da sua dieta e o tipo , mais fraca, média, ou forte. As barras indicam quantas calorias você está comendo do total permitido.
+        Clique nas imagens para obter mais informação de cada alimento. Clique nos botões de calcular para salvar cada tipo de alimento e depois salve a dieta do seu plano.
+        Lembre-se sempre de inicializar seu plano antes de calcular as calorias. 
+      </p>
+      <ul class="um">
+        <div>
+          <form action="" method="POST" onsubmit="return false">
+          <label>Tipo de dieta</label>
+          <select id="tipos" class="cabeca" type="number" name="tipo" class="form-select" required>
+            <option value=1>iniciante</option>
+            <option value=2>avançado</option>
+            <option value=3>greve de fome</option>
+          </select>
+          <br>
+          <input onclick="tiposs()" class="cabeca"  type="submit" name="reservar" value="inicie seu planejamento">
+         </form>
+         </div>
+        <!-- <form action="{% url 'nome_dieta' %}" method="POST" onsubmit="return false">{% csrf_token %}
+          <label>Nome da dieta</label>
+          <input id="nome_dieta"type="text" name="nome" required>
+          <br>
+          <label>Tipo de dieta</label>
+          <select id="tipos" class="cabeca" type="number" name="tipo" class="form-select" required>
+            <option value=1>iniciante</option>
+            <option value=2>avançado</option>
+            <option value=3>greve de fome</option>
+          </select>
+          <br>
+          <input onclick="tiposs()" class="cabeca"  type="submit" name="reservar" value="inicie seu planejamento"> -->
+          
+      
+      <div>
+        {% if tots0 %}
+      <p>Não há comida salva no seu plano!Escolha suas porções e depois salve o plano.</p>
+      {% endif %}
+      {% if tots1 %}
+      <label for="file" style="font-size:150%;">{{tots1}} calorias de um total de {{total2}}:</label>
+      <progress id="file" value="{{tots1}}" max="{{total2}}"></progress>
+      {% endif %}
+        <p id="titulo" style="font-size:200%;">{{dieta}}</p>
+        <!-- <p id="titulo" style="font-size:200%;"></p> -->
+      </div>
+      </ul>
+      <!-- <a  style="text-decoration:none;" href="{% url 'sair' %}">Sair do plano atual</a> -->
+      <br>
+      <!-- <a onclick="saida()" style="text-decoration:none;" href="{% url 'descartar' %}" onsubmit="return false">Descarte o plano atual</a> -->
+      <p style="font-size: 175%;">Aqui estão os carboidratos</p>
+    </div>
+    </ul>
+    <ul class="carbohidratos">
+      <div>
+      <figure>
+        <img onclick="funpao()" onmouseenter="bigImg(this)" onmouseleave="normalImg(this)" class="imagens" src="{%static 'baguete.jpg'%}" alt="Baguete" width="200" height="200" />
+        <figcaption>Pão:20 cal por porção</figcaption>
+        <button onclick="updateValue1()" id="plus1" class="count-button">
+          +
+      </button>
+      <span id="value1">0</span>
+      <button onclick="updateValue2()" id="minus1" class="count-button">
+          -
+    </button>
+      </figure>
+     
+    </div>
+    <div>
+      <figure>
+        <img  onclick="funmilho()" onmouseenter="bigImg(this)" onmouseleave="normalImg(this)" class="imagens" src="{%static 'milho.jpg'%}" alt="milho" width="200" height="200"/>
+        <figcaption>Milho:10 cal por porção</figcaption>
+        <button onclick="updateValue3()" id="plus1" class="count-button">
+          +
+      </button>
+      <span id="value2">0</span>
+      <button onclick="updateValue4()" id="minus1" class="count-button">
+          -
+    </button>
+      </figure>
+    </div>
+    <div>
+      <figure>
+        <img onclick="funarroz()" onmouseenter="bigImg(this)" onmouseleave="normalImg(this)" class="imagens" src="{%static 'arroz.jpg'%}" alt="arroz" width="200" height="200"/>
+        <figcaption>Arroz:5 cal por porção</figcaption>
+        <button onclick="updateValue5()" id="plus1" class="count-button">
+          +
+      </button>
+      <span id="value3">0</span>
+      <button onclick="updateValue6()" id="minus1" class="count-button">
+          -
+        </button>
+      </figure>
+    </div>
+    <div>
+      <p id="carb"></p>
+    </div>
+    </ul>
+    <button type="button" onclick="barra_carb()">Clique aqui para calcular os carboidratos</button>
+    
+      <!-- <input type="hidden" id="pan"  name="pan"  required>
+      <input type="hidden" id="mio"  name="mio"  required>
+      <input type="hidden" id="aro"  name="aro"  required>
+      <input onclick="escondida1()" class="cabeca" type="submit" name="carb_cal" value="Calcule os carboidratos">
+    </form> -->
+    <!-- {% if carbos %}
+    <p>Oh não! Você ultrapassou o limite de carboidratos.</p>
+    {% endif %}
+    {% if carbos0 %}
+    <p>Não há comida selecionada, você tem que comer algo!</p>
+    {% endif %} -->
+    
+    <!-- <label id="barra1" for="file" style="font-size:150%;"></label>
+    <progress id="file" value="1" max="10"></progress> -->
+    <p id="carboss"></p>
+    <p id="barra1txt"></p>
+    <div class="barra1">
+      <div></div>
+    </div>
+
+    <p style="font-size: 175%;">Escolha suas proteínas</p>
+    <ul class="proteinas">
+      <div>
+      <figure>
+        <img onclick="funbife()" onmouseenter="bigImg(this)" onmouseleave="normalImg(this)" class="imagens" src="{%static 'bife.jpg'%}" alt="bife" width="200" height="200" />
+        <figcaption>Bife 15 cal por porção</figcaption>
+        <button onclick="updateValue7()" id="plus1" class="count-button">
+          +
+      </button>
+      <span id="value4">0</span>
+      <button onclick="updateValue8()" id="minus1" class="count-button">
+          -
+    </button>
+      </figure>
+     
+    </div>
+    <div>
+      <figure>
+        <img  onclick="funpeixe()" onmouseenter="bigImg(this)" onmouseleave="normalImg(this)" class="imagens" src="{%static 'peixe.jpg'%}" alt="peixe" width="200" height="200"/>
+        <figcaption>Peixe:10 cal por porção</figcaption>
+        <button onclick="updateValue9()" id="plus1" class="count-button">
+          +
+      </button>
+      <span id="value5">0</span>
+      <button onclick="updateValue10()" id="minus1" class="count-button">
+          -
+    </button>
+      </figure>
+    </div>
+    <div>
+      <figure>
+        <img onclick="funovo()" onmouseenter="bigImg(this)" onmouseleave="normalImg(this)" class="imagens" src="{%static 'ovo.jpg'%}" alt="ovo" width="200" height="200"/>
+        <figcaption>Ovo:5 cal por porção</figcaption>
+        <button onclick="updateValue11()" id="plus1" class="count-button">
+          +
+      </button>
+      <span id="value6">0</span>
+      <button onclick="updateValue12()" id="minus1" class="count-button">
+          -
+        </button>
+      </figure>
+    </div>
+    <div>
+      <p id="prot"></p>
+    </div>
+    </ul>
+    <button type="button" onclick="barra_prot()">Clique aqui para calcular as proteínas</button>
+    <br>
+    
+    <!-- 
+      <input type="hidden" id="bif"  name="bif"  required>
+      <input type="hidden" id="pex"  name="pex"  required>
+      <input type="hidden" id="ovo"  name="ovo"  required>
+      <input onclick="escondida2()" class="cabeca" type="submit" name="carb_cal" value="Calcule as proteinas">
+    </form>
+    {% if protos %}
+    <p>Oh não! Você ultrapassou o limite de proteinas.</p>
+    {% endif %}
+    {% if protos0 %}
+    <p>Não há comida selecionada, você tem que comer algo!</p>
+    {% endif %}
+    {% if protos1 %}
+    <label for="file" style="font-size:150%;">{{protos1}} calorias de um total de {{total1}}:</label>
+    <progress id="file" value="{{protos1}}" max="{{total1}}"></progress>
+    {% endif %} -->
+    <p id="protoss"></p>
+    <p id="barra2txt"></p>
+    <div class="barra2">
+      <div></div>
+    </div>
+
+
+
+    <p style="font-size: 175%;">Escolha seus doces(mas só um pouco)</p>
+    <ul class="doces">
+      <div>
+      <figure>
+        <img onclick="funchocolate()" onmouseenter="bigImg(this)" onmouseleave="normalImg(this)" class="imagens" src="{%static 'chocolate.jpg'%}" alt="chocolate" width="200" height="200" />
+        <figcaption>chocolate 30 cal por porção</figcaption>
+        <button onclick="updateValue13()" id="plus1" class="count-button">
+          +
+      </button>
+      <span id="value7">0</span>
+      <button onclick="updateValue14()" id="minus1" class="count-button">
+          -
+    </button>
+      </figure>
+     
+    </div>
+    <div>
+      <figure>
+        <img  onclick="funsorvete()" onmouseenter="bigImg(this)" onmouseleave="normalImg(this)" class="imagens" src="{%static 'sorvete.jpg'%}" alt="sorvete" width="200" height="200"/>
+        <figcaption>Sorvete:20 cal por porção</figcaption>
+        <button onclick="updateValue15()" id="plus1" class="count-button">
+          +
+      </button>
+      <span id="value8">0</span>
+      <button onclick="updateValue16()" id="minus1" class="count-button">
+          -
+    </button>
+      </figure>
+    </div>
+    <div>
+      <figure>
+        <img onclick="funbombom()" onmouseenter="bigImg(this)" onmouseleave="normalImg(this)" class="imagens" src="{%static 'bombom.jpg'%}" alt="bombom" width="200" height="200"/>
+        <figcaption>Bombom:5 cal por porção</figcaption>
+        <button onclick="updateValue17()" id="plus1" class="count-button">
+          +
+      </button>
+      <span id="value9">0</span>
+      <button onclick="updateValue18()" id="minus1" class="count-button">
+          -
+        </button>
+      </figure>
+    </div>
+    <div>
+      <p id="doce"></p>
+    </div>
+    </ul>
+    <button type="button" onclick="barra_doce()">Clique aqui para calcular os doces</button>
+    <!--
+      <input type="hidden" id="cho"  name="cho"  required>
+      <input type="hidden" id="sor"  name="sor"  required>
+      <input type="hidden" id="bom"  name="bom"  required>
+      <input onclick="escondida3()" class="cabeca" type="submit" name="carb_cal" value="Calcule os doces">
+    </form>
+    {% if docess %}
+    <p>Oh não! Você ultrapassou o limite de doces.</p>
+    {% endif %}
+    {% if doces0 %}
+    <p>Não há comida selecionada, você tem que comer algo!</p>
+    {% endif %}
+    {% if doces1 %}
+    <label for="file" style="font-size:150%;">{{doces1}} calorias de um total de {{total2}}:</label>
+    <progress id="file" value="{{doces1}}" max="{{total2}}"></progress>
+    {% endif %} -->
+    <br>
+    <p id="barra3txt"></p>
+    <div class="barra3">
+      <div></div>
+    </div>
+    <!-- <a href="{% url 'total' %}" style="font-size: 150%;">Clique aqui para ver o total de calorias do plano</a> -->
+    <br>
+    <form action="{% url 'nome_dieta' %}" method="POST" autocomplete="off">{% csrf_token %}
+      <label>Nome da dieta</label>
+          <input id="nome_dieta"type="text" name="nome" required>
+          <br>
+          <input type="hidden" id="pan"  name="pan"  required>
+          <input type="hidden" id="mio"  name="mio"  required>
+          <input type="hidden" id="aro"  name="aro"  required>
+          <input type="hidden" id="bif"  name="bif"  required>
+          <input type="hidden" id="pex"  name="pex"  required>
+          <input type="hidden" id="ovo"  name="ovo"  required>
+          <input type="hidden" id="cho"  name="cho"  required>
+          <input type="hidden" id="sor"  name="sor"  required>
+          <input type="hidden" id="bom"  name="bom"  required>
+          <input type="hidden" id="tip"  name="tipo"  required>
+          <input onclick="escondida()" class="cabeca"  type="submit" name="reservar" value="Salve seu plano">
+    </form>
+    <!-- {% if tots0 %}
+    <p>Não há comida salva no seu plano!Utilize os botões de calculo para salvar calorias no seu plano.</p>
+    {% endif %}
+    {% if tots1 %}
+    <label for="file" style="font-size:150%;">{{tots1}} calorias de um total de {{total2}}:</label>
+    <progress id="file" value="{{tots1}}" max="{{total2}}"></progress>
+    {% endif %} -->
+    <br>
+    <a  style="text-decoration:none;font-size: 125%;" href="{% url 'descartar' %}">Descartar plano atual</a>
+    <br>
+    <a href="{% url 'total' %}" style="font-size: 125%;">Clique aqui para ver o total de calorias do plano</a>
+    <div>
+      <!-- {% if tots0 %}
+      <p>Não há comida salva no seu plano!Escolha suas porções e depois salve o plano.</p>
+      {% endif %}
+      {% if tots1 %}
+      <label for="file" style="font-size:150%;">{{tots1}} calorias de um total de {{total2}}:</label>
+      <progress id="file" value="{{tots1}}" max="{{total2}}"></progress>
+      {% endif %} -->
+      
+  
+</div>
+  </body>
+
+</html>
